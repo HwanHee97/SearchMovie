@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SearchMovie</string>
+    <string name="movie_title">제목: </string>
+    <string name="movie_pubdate">출시: %s</string>
+    <string name="movie_userating">평점: %s</string>
+
 </resources>

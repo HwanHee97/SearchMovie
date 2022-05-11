@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="movieItem"
+            type="com.example.searchmovie.model.MovieItem" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="3dp">
+
+
+        <ImageView
+            android:id="@+id/item_imageView"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+
+            android:scaleType="fitCenter"
+            android:src="@{movieItem.image}"
+            tools:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_margin="3dp"
+                tools:text="가나다라마" />
+
+            <TextView
+                android:id="@+id/item_pubdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@{@string/movie_pubdate(movieItem.pubDate)}"
+                android:layout_margin="3dp"
+
+                tools:text="가나다나다라마나다라마나다라마나다라마나다라마나다라마라마" />
+
+            <TextView
+                android:id="@+id/item_user_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{@string/movie_pubdate(movieItem.userRating)}"
+                android:layout_margin="3dp"
+
+                tools:text="가나다라마" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</layout>

@@ -20,15 +20,15 @@ class MainViewModel:ViewModel(){
             when (responseStatus) {
                 RESPONSE_STATUS.OKAY -> {
                     if (MovieData != null) {
-                        Log.d(Constants.TAG, "HomeViewModel - api 호출 성공: ${MovieData}")
+                        Log.d(Constants.TAG, "MainViewModel - api 호출 성공: ${MovieData}")
+                        _movieData.value=MovieData
                     }
-
                 }
                 RESPONSE_STATUS.FAIL -> {
-                    Log.d(Constants.TAG, "HomeViewModel - api 호출 실패:")
+                    Log.d(Constants.TAG, "MainViewModel - api 호출 실패:")
                 }
                 RESPONSE_STATUS.NO_CONTENT -> {
-                    Log.d(Constants.TAG, "HomeViewModel - 검색 결과가 없습니다.")
+                    Log.d(Constants.TAG, "MainViewModel - 검색 결과가 없습니다.")
                 }
             }
         })

@@ -5,43 +5,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_margin="3dp">
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="영화 검색"
-        android:singleLine="true"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_weight="2" />
 
-    <Button
-        android:id="@+id/search_button"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="영화검색"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-    android:layout_weight="1" />
+        android:layout_margin="3dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/recent_search_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="최근 검색"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_weight="1"/>
-</LinearLayout>
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="2"
+            android:hint="영화 검색"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:text="영화검색" />
+
+        <Button
+            android:id="@+id/recent_search_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:text="최근 검색" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:background="@color/black"
         android:id="@+id/recycler_movie_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/layout_movie_item" />
 
 </LinearLayout>

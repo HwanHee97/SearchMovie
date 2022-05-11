@@ -7,11 +7,13 @@ data class RpMovieData(
 )
 data class MovieItem(
     @SerializedName("title")
-    val title:String,
+    var title:String,
     @SerializedName("pubDate")
     val pubDate:String,
     @SerializedName("userRating")
     val userRating: String,
     @SerializedName("link")
-    val link: String
+    val link: String,
+    @SerializedName("image")
+    val image: String
 )
