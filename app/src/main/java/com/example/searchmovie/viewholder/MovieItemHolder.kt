@@ -3,7 +3,6 @@ package com.example.searchmovie.viewholder
 import android.content.Context
 import android.content.Intent
 import android.text.Html
-import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -15,11 +14,9 @@ import com.example.searchmovie.R
 import com.example.searchmovie.WebViewActivity
 import com.example.searchmovie.databinding.LayoutMovieItemBinding
 import com.example.searchmovie.model.MovieItem
-import com.example.searchmovie.utils.Constants
 
-class MovieItemHolder (val binding:LayoutMovieItemBinding,val context: Context):RecyclerView.ViewHolder(binding.root){
+class MovieItemHolder (private val binding:LayoutMovieItemBinding, private val context: Context):RecyclerView.ViewHolder(binding.root){
     fun bindWithMovie(item:MovieItem){
-        Log.d(Constants.TAG,"MovieItemHolder - bindWithMovie() called/${item.title}")
 
         with(binding){
             itemTitle.text= context.getString(R.string.movie_title)+Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString()
@@ -42,7 +39,7 @@ class MovieItemHolder (val binding:LayoutMovieItemBinding,val context: Context):
             .into(view)//표시할 이미지 뷰
 
     }
-    fun setItemClickListener( itemLayout:LinearLayout, loadUrl:String? ){
+    private fun setItemClickListener(itemLayout:LinearLayout, loadUrl:String? ){
         itemLayout.setOnClickListener{
             //액티비티가아닌 viewholderd에서 사용하기 때문에 context가 필요
             val nextIntent = Intent(context, WebViewActivity::class.java)

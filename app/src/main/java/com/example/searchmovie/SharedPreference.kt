@@ -2,9 +2,7 @@ package com.example.searchmovie
 
 import android.content.Context
 import org.json.JSONArray
-import android.content.SharedPreferences
 import android.content.Context.MODE_PRIVATE
-
 
 class SharedPreference {
     fun setRecentListPref(context: Context, key: String, searchString: String) {
@@ -26,7 +24,7 @@ class SharedPreference {
         editor.apply()
     }
 
-    private fun ArrayList<String>.limitRecentSearchList(searchString: String) {
+    private fun ArrayList<String>.limitRecentSearchList(searchString: String) {//최근검색어 리스트의 제약사항 적용하는 확장함수 1. 최대10개 2. 중복금지 3.최근 추가항목을 가장 뒤로 순서 변경
         if (this.contains(searchString)) {
             for (i in this.indices) {
                 if (this[i] == searchString) {
@@ -65,6 +63,5 @@ class SharedPreference {
 //        editor.clear()
 //        editor.commit()//commit 호출시 동기 처리 apply 호출시 비동기 처리
 //    }
-
 
 }
