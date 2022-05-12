@@ -4,6 +4,7 @@ package com.example.searchmovie.network
 
 import com.example.searchmovie.model.RpMovieData
 import com.example.searchmovie.utils.API
+import com.example.searchmovie.utils.ClientInfo
 import com.example.searchmovie.utils.RESPONSE_STATUS
 import retrofit2.Call
 import retrofit2.Response
@@ -17,7 +18,7 @@ class RetrofitManager {
 
     fun callMovieData(searchText:String,completion: (RESPONSE_STATUS, RpMovieData?) -> Unit) {
 
-        call=iRetrofit?.searchMovie("8qhdA32cuaaz_6mU_BMI","W9ZeGqevgm",searchText).let { it } ?: return
+        call=iRetrofit?.searchMovie(ClientInfo.CLIENT_ID,ClientInfo.CLIENT_SECRET,searchText).let { it } ?: return
 
         call.enqueue(object : retrofit2.Callback<RpMovieData> {
             override fun onResponse(call: Call<RpMovieData>, response: Response<RpMovieData>) {
