@@ -8,7 +8,8 @@ import com.example.searchmovie.model.RecentSearchData
 import com.example.searchmovie.viewholder.RecentSearchItemHolder
 import com.example.searchmovie.viewmodel.MainViewModel
 
-class RecentSearchRecyclerViewAdapter(var searchData: RecentSearchData,val mainViewModel: MainViewModel):RecyclerView.Adapter<RecentSearchItemHolder>() {
+class RecentSearchRecyclerViewAdapter(private var searchData: RecentSearchData, private val mainViewModel: MainViewModel):RecyclerView.Adapter<RecentSearchItemHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSearchItemHolder {
         val binding=LayoutRecentSearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return RecentSearchItemHolder(binding,mainViewModel)

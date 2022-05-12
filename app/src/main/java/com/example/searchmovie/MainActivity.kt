@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private  val movieRecyclerViewAdapter: MovieRecyclerViewAdapter by lazy {
         MovieRecyclerViewAdapter(rpMovieData,this)
     }
+    private val sharedPreference=SharedPreference()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setBinding()
@@ -35,22 +36,31 @@ class MainActivity : AppCompatActivity() {
         setRecyclerView()
         setObserve()
     }
+
     private fun setBinding() {
         binding = ActivityMainBinding.inflate(layoutInflater)
     }
+
     private fun setButtonClickListener(){
+        //검색
         binding.apply {
             searchButton.setOnClickListener {
-                viewModel.getMovieData(etSearch.text.toString())
-                val imm: InputMethodManager =
-                    getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(etSearch.windowToken,0)
+                var searchString=etSearch.text.toString()
+                viewModel.getMovieData(searchString)
+                sharedPreference.setRecentListPref(this@MainActivity,Constants.SEARCH_LIST_SHARED_KEY,searchString)
+                val imm: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(etSearch.windowToken,0)//키보드 내리기
             }
-            //최근검색어 로부터 검색기능 테스트
+            //최근검색어
             recentSearchButton.setOnClickListener {
-                var recentSearchData=RecentSearchData(arrayListOf("아바타","공조","타자","가나다라마바사아자","기억"))
-                dialog = CustomDialog(context = this@MainActivity,recentSearchData,mainViewModel = viewModel)
-                dialog.startDialog()
+                var recentSearchData=RecentSearchData(sharedPreference.getRecentListPref(this@MainActivity,Constants.SEARCH_LIST_SHARED_KEY))//최근 검색 리스트 가져오기
+                if (recentSearchData.searchDataList.size>0){//최근 검색어 리스트가 없으면 recentSearchData == [] 이기때문
+                    recentSearchData.searchDataList.reverse()//가장 최근순으로 보여주기위해 배열을 뒤집는다.
+                    dialog = CustomDialog(context = this@MainActivity,recentSearchData,mainViewModel = viewModel)
+                    dialog.startDialog()
+                }else{
+                    Toast.makeText(this@MainActivity,"최근 검색어가 없습니다.",Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -61,17 +71,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun setObserve() {
-        viewModel.rpMovieData.observe(this, Observer {
-            Log.d(Constants.TAG, "MainActivity - setObserve: ")
-            movieRecyclerViewAdapter.notifyPhotoDataChange(it)
-        })
-        viewModel.recentSearchString.observe(this, Observer {
-            binding.apply {
-                etSearch.setText(it)
-                viewModel.getMovieData(etSearch.text.toString())
-            }
-            dialog.endDialog()
-        })
+        viewModel.apply {
+            rpMovieData.observe(this@MainActivity, Observer {
+                movieRecyclerViewAdapter.notifyPhotoDataChange(it)
+            })
+
+            recentSearchString.observe(this@MainActivity, Observer {
+                binding.apply {
+                    etSearch.setText(it)
+                    viewModel.getMovieData(it)
+                    sharedPreference.setRecentListPref(this@MainActivity,Constants.SEARCH_LIST_SHARED_KEY,it)
+                }
+                dialog.endDialog()
+            })
+        }
     }
 
 }
