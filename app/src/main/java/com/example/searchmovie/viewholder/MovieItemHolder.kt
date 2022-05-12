@@ -1,4 +1,4 @@
-package com.example.searchmovie
+package com.example.searchmovie.viewholder
 
 import android.content.Context
 import android.content.Intent
@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.signature.ObjectKey
+import com.example.searchmovie.R
+import com.example.searchmovie.WebViewActivity
 import com.example.searchmovie.databinding.LayoutMovieItemBinding
 import com.example.searchmovie.model.MovieItem
 import com.example.searchmovie.utils.Constants

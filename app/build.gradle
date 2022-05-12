@@ -51,7 +51,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     //gson컨버터
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-
+    //
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
     //글라이드
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'

@@ -14,6 +14,9 @@ class MainViewModel:ViewModel(){
     val rpMovieData: LiveData<RpMovieData>
         get() =_movieData
 
+    private var _recentSearchString= MutableLiveData<String>()
+    val recentSearchString: LiveData<String>
+        get() =_recentSearchString
     fun getMovieData(searchText: String) {
         RetrofitManager.instance.callMovieData(searchText,completion = {
                 responseStatus, MovieData ->
@@ -32,6 +35,9 @@ class MainViewModel:ViewModel(){
                 }
             }
         })
+    }
+    fun setRescentSearchString(s:String){
+        _recentSearchString.value=s
     }
 
 }
